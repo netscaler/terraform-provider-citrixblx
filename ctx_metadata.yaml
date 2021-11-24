@@ -1,0 +1,10 @@
+owner: georgen
+pipeline:
+  citool: ''
+  releaseBranch: ''
+  sonarqube: null
+productionUse: CustomerCurrent
+repoType: Library
+reporting:
+  product: Networking
+  teamname: automation
