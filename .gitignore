@@ -1,0 +1,14 @@
+*.tfstate*
+tags
+terraform-provider-citrixblx
+tools/tools
+.idea
+*.iml
+*.pem
+.terraform/
+crash.log
+.DS_Store
+dist/
+tf.log
+*.plan
+.terraform.lock.hcl
