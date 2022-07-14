@@ -171,7 +171,6 @@ github.com/mitchellh/cli
 # github.com/mitchellh/copystructure v1.0.0
 github.com/mitchellh/copystructure
 # github.com/mitchellh/go-homedir v1.1.0
-## explicit
 github.com/mitchellh/go-homedir
 # github.com/mitchellh/go-testing-interface v1.0.4
 github.com/mitchellh/go-testing-interface
