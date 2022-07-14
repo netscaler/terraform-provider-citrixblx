@@ -1,4 +1,4 @@
-Terraform `adc` Provider
+Terraform `blx` Provider
 =========================
 
 - Website: https://www.terraform.io
