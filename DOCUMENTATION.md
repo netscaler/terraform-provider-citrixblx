@@ -1,7 +1,7 @@
 ## Terraform provider for Citrix BLX
 Citrix has developed a custom Terraform provider for automating [Citrix BLX](https://docs.citrix.com/en-us/citrix-adc-blx/current-release.html) deployments and configurations. Using [Terraform](https://www.terraform.io), you can [deploying and configure a Citrix ADC BLX](https://www.youtube.com/watch?v=3hNWfRKidNI). 
 
-Learn more about Citrix ADC BLX Automation [here](https://github.com/citrix/terraform-provider-citrixadc) 
+To configure a Citrix ADC BLX after it's deployed, the CitrixADC Terraform module can be used. [Link](https://github.com/citrix/terraform-provider-citrixadc) 
 
 **Important note: The provider is not able to read remote state of the deployed BLX.**
 
@@ -70,7 +70,7 @@ mkdir -p /home/user/.terraform.d/plugins/registry.terraform.io/citrix/citrixblx/
 cp terraform-provider-citrixblx /home/user/.terraform.d/plugins/registry.terraform.io/citrix/citrixblx/0.0.1/linux_amd64/
 ```
 
-## Get Started on Configuring ADC through Terraform
+## Get Started on using terraform to deploy Citrix BLX
 _In order to familiarize with citrix blx deployment through terraform, lets get started with basic configuration of setting up a dedicated mode BLX in Terraform.
 
 Before we configure, clone the github repository in your local machine as follows:
@@ -81,7 +81,7 @@ git clone https://github.com/citrix/terraform-provider-citrixblx/
 ```
 cd terraform-provider-citrixblx/examples/
 ```
-Lets configure a simple server in citrix ADC.
+Lets deploy a simple shared mode Citrix ADC BLX.
 ```
 cd terraform-provider-citrixblx/examples/simple-blx-shared/
 ```
@@ -108,7 +108,7 @@ provider "citrixblx" {
 resource "citrixblx_adc" "blx_1" {
         source = "/home/user/blx-rpm.tar.gz"
         host = {
-                ipaddress = "10.20.30.40"
+                ipaddress = "2.2.2.2"
                 username  = "user"
                 password  = "DummyHostPass"
         }
