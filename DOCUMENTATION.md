@@ -9,14 +9,11 @@ Learn more about Citrix ADC BLX Automation [here](https://github.com/citrix/terr
 
 * [Why Terraform for Citrix ADC BLX ?](#why-terraform-for-citrix-adc-)
 * [Navigating Repository](#navigating-the-repository)
-* [Installating Terraform and Citrix ADC Provider](#installation)
-* [Get Started on using terraform to configure Citrix ADC](#get-started-on-configuring-adc-through-terraform)
-* [Generic nitro\_resource](#generic-nitro-resource)
+* [Installating Terraform and Citrix BLX Provider](#installation)
+* [Get Started on using terraform to deploy Citrix BLX](#get-started-on-configuring-adc-through-terraform)
 * Usage Guidelines
   - [Understanding Provider Configuration](#understanding-provider-configuration)
   - [Understanding Resource Configuration](#resource-configuration)
-  - [General guidelines on ADC configurations](#general-guidelines-on-configuring-adc)
-  - [List of ADC use-cases supported through Terraform](#adc-use-case-supported-through-terraform)
   - [Building your own provider](#building)
 
 
@@ -24,9 +21,9 @@ Learn more about Citrix ADC BLX Automation [here](https://github.com/citrix/terr
 
 [Terraform](https://www.terraform.io/) is an open-source infrastructure as code software tool that provides a consistent CLI workflow to manage hundreds of cloud services.Terraform codifies cloud APIs into declarative configuration files.
 Terraform can be used to **_deploy_** and **_configure_** ADC BLX. Configuring Citrix ADC BLX through Terraform provides multiple benefits.
-1. Infrastucture as Code approach to ADC -You can store the ADC configs in scm tools like GitHub and version and track it like just other code repositories you have.
-2. ADC BLX resource file in Terraform is human friendly and easy to understand.
-3. Abstract away the complexity associated with Citrix ADC BLX deployments.
+
+1. ADC BLX resource file in Terraform is human friendly and easy to understand.
+2. Abstract away the complexity associated with Citrix ADC BLX deployments.
 
 
 ## Requirement
@@ -86,7 +83,7 @@ cd terraform-provider-citrixblx/examples/
 ```
 Lets configure a simple server in citrix ADC.
 ```
-cd terraform-provider-citrixblx/examples/dedicate_mode/
+cd terraform-provider-citrixblx/examples/simple-blx-shared/
 ```
 **Step-2** : Provider.tf contains the details of the target Citrix ADC.Edit the `simple_server/provider.tf` as follows and add details of your target adc.
 For **terraform version > 13.0** edit the provider.tf as follows
@@ -106,16 +103,24 @@ For **terraform version < 13.0**, edit the `provider.tf` as follows
 provider "citrixblx" {
  }
  ```
-**Step-3** : Resources.tf contains the desired state of the resources that you want to manage through terraform.Here we want to create simple server. Edit the `simple_server/resources.tf` with your configuration values - name,ipaddress as below. 
+**Step-3** : Resources.tf contains the desired state of the resources that you want to manage through terraform.Here we want to create simple server. Edit the `simple-blx-shared/resources.tf` with your configuration values - name,ipaddress as below. 
 ```
-resource "citrixadc_server" "test_server" {
-  name      = "test_server"
-  ipaddress = "192.168.2.2"
+resource "citrixblx_adc" "blx_1" {
+        source = "/home/user/blx-rpm.tar.gz"
+        host = {
+                ipaddress = "10.20.30.40"
+                username  = "user"
+                password  = "DummyHostPass"
+        }
+        config = {
+                worker_processes = "2"
+        }
+        password = "DummyPassword"
 }
 ```
 **Step-4** : Once the provider.tf and resources.tf is edited and saved with the desired values in the simple_server folder, you are good to run terraform and configure ADC.Initialize the terraform by running `terraform-init` inside the simple_server folder as follow:
 ```
-terraform-provider-citrixadc/examples/simple_server$ terraform init
+terraform-provider-citrixblx/examples/simple-blx-shared$ terraform init
 ```
 You should see following output if terraform was able to successfully find citrix blx provider and initialize it -
 ```
