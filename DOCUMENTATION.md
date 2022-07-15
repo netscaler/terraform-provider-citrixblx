@@ -118,7 +118,7 @@ resource "citrixblx_adc" "blx_1" {
         password = "DummyPassword"
 }
 ```
-**Step-4** : Once the provider.tf and resources.tf is edited and saved with the desired values in the simple-blx-shared folder, you are good to run terraform and configure ADC.Initialize the terraform by running `terraform-init` inside the simple_server folder as follow:
+**Step-4** : Once the provider.tf and resources.tf is edited and saved with the desired values in the simple-blx-shared folder, you are good to run terraform and configure ADC.Initialize the terraform by running `terraform-init` inside the simple-blx-shared folder as follow:
 ```
 terraform-provider-citrixblx/examples/simple-blx-shared$ terraform init
 ```
@@ -141,7 +141,38 @@ If you ever set or change modules or backend configuration for Terraform,
 rerun this command to reinitialize your working directory. If you forget, other
 commands will detect it and remind you to do so if necessary.
 ```
+**Step-5** : We can now do a terraform plan to see the BLX deployment that will be created. 
+```
+terraform-provider-blx/examples/simple-blx-shared# terraform plan
+  # citrixblx_adc.blx_1 will be created
+  + resource "citrixblx_adc" "blx_1" {
+      + config   = {
+          + "worker_processes" = "2"
+        }
+      + host     = {
+          + "ipaddress" = "2.2.2.2"
+          + "password"  = "DummyHostPass"
+          + "username"  = "user"
+        }
+      + id       = (known after apply)
+      + password = "DummyPassword"
+      + source   = "/home/user/blx-rpm.tar.gz"
+    }
 
+Plan: 1 to add, 0 to change, 0 to destroy.
+```
+**Step-6** : We can now do a `terraform apply` followed by a `yes` to deploy the BLX.
+```
+citrixblx_adc.blx_1: Creating...
+citrixblx_adc.blx_1: Still creating... [10s elapsed]
+citrixblx_adc.blx_1: Still creating... [20s elapsed]
+`
+`
+citrixblx_adc.blx_1: Still creating... [3m30s elapsed]
+citrixblx_adc.blx_1: Still creating... [3m40s elapsed]
+citrixblx_adc.blx_1: Creation complete after 3m46s
+
+```
 
 ## Usage Guidelines
 
