@@ -10,7 +10,7 @@ Learn more about Citrix ADC BLX Automation [here](https://github.com/citrix/terr
 * [Why Terraform for Citrix ADC BLX ?](#why-terraform-for-citrix-adc-)
 * [Navigating Repository](#navigating-the-repository)
 * [Installating Terraform and Citrix BLX Provider](#installation)
-* [Get Started on using terraform to deploy Citrix BLX](#get-started-on-configuring-adc-through-terraform)
+* [Get Started on using terraform to deploy Citrix BLX](#get-started-on-using-terraform-to-deploy-citrix-blx)
 * Usage Guidelines
   - [Understanding Provider Configuration](#understanding-provider-configuration)
   - [Understanding Resource Configuration](#resource-configuration)
@@ -49,7 +49,7 @@ First step is to install Terraform CLI. Refer the https://learn.hashicorp.com/tu
 Terraform provider for Citrix ADC is not available through terrform.registry.io as of now. Hence users have to install the provider manually.
 
 #### **Follow below steps to install citrix adc provider for Terraform CLI version < 13.0**
-1. Download the citrix adc terraform binary in your local machine where you have terraform installed from the [Releases section of the github repo](https://github.com/citrix/terraform-provider-citrixblx/releases).Untar the files and you can find the binary file terraform-provider-ctitrixblx.
+1. Download the citrix blx terraform binary in your local machine where you have terraform installed from the [Releases section of the github repo](https://github.com/citrix/terraform-provider-citrixblx/releases).Untar the files and you can find the binary file terraform-provider-ctitrixblx.
 
 2. Edit .terraformrc for the base directory of plugins:
 ```
@@ -59,13 +59,13 @@ plugin_cache_dir = "/home/user/.terraform.d/plugins"
 e.g. `/home/user/.terraform.d/plugins/linux_amd64/terraform-provider-citrixblx`
 
 #### **Follow below steps to install citrix adc provider for Terraform CLI version >13.0**
-1. Download the citrix blx terraform binary in your local machine where you have terraform installed from the [Releases section of the github repo](https://github.com/citrix/terraform-provider-citrixadc/releases).Untar the files and you can find the binary file terraform-provider-citrixblx.
+1. Download the citrix blx terraform binary in your local machine where you have terraform installed from the [Releases section of the github repo](https://github.com/citrix/terraform-provider-citrixblx/releases).Untar the files and you can find the binary file terraform-provider-citrixblx.
 
 2. Create a following directory in your local machine and save the citrix adc terraform binary. e.g. in Ubuntu machine. Note that the directory structure has to be same as below, you can edit the version -0.0.1 to the citrix adc version you downloaded.
 ```
 mkdir -p /home/user/.terraform.d/plugins/registry.terraform.io/citrix/citrixblx/0.0.1/linux_amd64/
 ```
-3. Copy the terraform-provider-citrixadc to the above created folder as shown below
+3. Copy the terraform-provider-citrixblx to the above created folder as shown below
 ```
 cp terraform-provider-citrixblx /home/user/.terraform.d/plugins/registry.terraform.io/citrix/citrixblx/0.0.1/linux_amd64/
 ```
@@ -85,7 +85,7 @@ Lets configure a simple server in citrix ADC.
 ```
 cd terraform-provider-citrixblx/examples/simple-blx-shared/
 ```
-**Step-2** : Provider.tf contains the details of the target Citrix ADC.Edit the `simple_server/provider.tf` as follows and add details of your target adc.
+**Step-2** : Provider.tf contains the details of the target Citrix ADC.Edit the `simple-blx-shared/provider.tf` as follows and add details of your target adc.
 For **terraform version > 13.0** edit the provider.tf as follows
 ```
 terraform {
@@ -206,7 +206,7 @@ resource "citrixblx_adc" "blx_1" {
         source = "/home/user/blx-rpm.tar.gz"
 
         host = {
-                ipaddress = "10.20.30.40"
+                ipaddress = "2.2.2.2"
                 username  = "user"
                 password  = "DummyHostPass"
         }
