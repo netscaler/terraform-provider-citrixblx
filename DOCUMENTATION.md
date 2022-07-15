@@ -38,14 +38,14 @@ You can download it from this [page](https://releases.hashicorp.com/terraform/).
 ## Navigating the repository
 
 1. _citrixblx folder_ - Contains the citrixblx resource file and modules leveraged by Terraform.
-2. _examples folder_ - Contain the examples for users to use various ADC resources.
+2. _examples folder_ - Contain the examples for users to deploy BLX.
 
 ## Installation
 
 ### **Step 1. Installing Terraform CLI:**
 First step is to install Terraform CLI. Refer the https://learn.hashicorp.com/tutorials/terraform/install-cli for installing Terraform CLI. 
 
-### **Step 2. Installing Citrix ADC Provider:**
+### **Step 2. Installing Citrix BLX Provider:**
 Terraform provider for Citrix ADC is not available through terrform.registry.io as of now. Hence users have to install the provider manually.
 
 #### **Follow below steps to install citrix adc provider for Terraform CLI version < 13.0**
@@ -59,15 +59,15 @@ plugin_cache_dir = "/home/user/.terraform.d/plugins"
 e.g. `/home/user/.terraform.d/plugins/linux_amd64/terraform-provider-citrixblx`
 
 #### **Follow below steps to install citrix adc provider for Terraform CLI version >13.0**
-1. Download the citrix adc terraform binary in your local machine where you have terraform installed from the [Releases section of the github repo](https://github.com/citrix/terraform-provider-citrixadc/releases).Untar the files and you can find the binary file terraform-provider-ctxadc.
+1. Download the citrix blx terraform binary in your local machine where you have terraform installed from the [Releases section of the github repo](https://github.com/citrix/terraform-provider-citrixadc/releases).Untar the files and you can find the binary file terraform-provider-citrixblx.
 
-2. Create a following directory in your local machine and save the citrix adc terraform binary. e.g. in Ubuntu machine. Note that the directory structure has to be same as below, you can edit the version -0.12.43 to the citrix adc version you downloaded.
+2. Create a following directory in your local machine and save the citrix adc terraform binary. e.g. in Ubuntu machine. Note that the directory structure has to be same as below, you can edit the version -0.0.1 to the citrix adc version you downloaded.
 ```
-mkdir -p /home/user/.terraform.d/plugins/registry.terraform.io/citrix/citrixblx/0.12.43/linux_amd64/
+mkdir -p /home/user/.terraform.d/plugins/registry.terraform.io/citrix/citrixblx/0.0.1/linux_amd64/
 ```
 3. Copy the terraform-provider-citrixadc to the above created folder as shown below
 ```
-cp terraform-provider-citrixblx /home/user/.terraform.d/plugins/registry.terraform.io/citrix/citrixblx/0.12.43/linux_amd64/
+cp terraform-provider-citrixblx /home/user/.terraform.d/plugins/registry.terraform.io/citrix/citrixblx/0.0.1/linux_amd64/
 ```
 
 ## Get Started on Configuring ADC through Terraform
@@ -103,7 +103,7 @@ For **terraform version < 13.0**, edit the `provider.tf` as follows
 provider "citrixblx" {
  }
  ```
-**Step-3** : Resources.tf contains the desired state of the resources that you want to manage through terraform.Here we want to create simple server. Edit the `simple-blx-shared/resources.tf` with your configuration values - name,ipaddress as below. 
+**Step-3** : Resources.tf contains the desired state of the resources that you want to manage through terraform. Here we want to create a shared mode blx. Edit the `simple-blx-shared/resources.tf` with your configuration values - host ip address, host username, host password, blx password  as below. 
 ```
 resource "citrixblx_adc" "blx_1" {
         source = "/home/user/blx-rpm.tar.gz"
@@ -118,7 +118,7 @@ resource "citrixblx_adc" "blx_1" {
         password = "DummyPassword"
 }
 ```
-**Step-4** : Once the provider.tf and resources.tf is edited and saved with the desired values in the simple_server folder, you are good to run terraform and configure ADC.Initialize the terraform by running `terraform-init` inside the simple_server folder as follow:
+**Step-4** : Once the provider.tf and resources.tf is edited and saved with the desired values in the simple-blx-shared folder, you are good to run terraform and configure ADC.Initialize the terraform by running `terraform-init` inside the simple_server folder as follow:
 ```
 terraform-provider-citrixblx/examples/simple-blx-shared$ terraform init
 ```
